@@ -17,14 +17,15 @@ def get_max_salary(path: str) -> int:
     int
         The maximum salary paid out of all job opportunities
     """
-    str_slr = 'max_salary'
-    salaries = {
-        int(job[str_slr]) for job in read(path) if job[str_slr].isnumeric()
-    }
+    salaries = [
+        int(job['max_salary']) for job in
+        read(path) if job['max_salary'].isnumeric()
+    ]
+
     max_salary = 0
     for salary in salaries:
-        if max_salary < salary:
-            max_salary = salary
+        max_salary = salary if max_salary < salary else max_salary
+
     return max_salary
 
 
@@ -43,7 +44,16 @@ def get_min_salary(path: str) -> int:
     int
         The minimum salary paid out of all job opportunities
     """
-    raise NotImplementedError
+    salaries = [
+        int(job['min_salary']) for job in
+        read(path) if job['min_salary'].isnumeric()
+    ]
+
+    min_salary = salaries[0]
+    for salary in salaries:
+        min_salary = salary if min_salary > salary else min_salary
+
+    return min_salary
 
 
 def matches_salary_range(job: Dict, salary: Union[int, str]) -> bool:

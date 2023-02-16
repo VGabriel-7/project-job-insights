@@ -23,14 +23,6 @@ def read(path: str) -> List[Dict]:
         return [row for row in file_header]
 
 
-jobs = read('data/jobs.csv')
-
-
-print({job['max_salary'] for job in jobs if job['max_salary'] != ''})
-
-int('123123')
-
-
 def get_unique_job_types(path: str) -> List[str]:
     """Checks all different job types and returns a list of them
 
